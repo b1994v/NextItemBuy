@@ -15,7 +15,7 @@
           <Property Name="IsIncome" Type="bit" Nullable="false" />
           <Property Name="Reason" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedOn" Type="datetime" />
-          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Items">
           <Key>
@@ -84,7 +84,7 @@
           <Property Name="IsIncome" Type="Boolean" Nullable="false" />
           <Property Name="Reason" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>

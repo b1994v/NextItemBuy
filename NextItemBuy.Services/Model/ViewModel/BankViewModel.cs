@@ -13,7 +13,7 @@ namespace NextItemBuy.Services.Model.ViewModel
         public bool IsIncome { get; set; }
         public string Reason { get; set; }
         public DateTime? CreatedOn { get; set; }
-        public DateTime? ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
     }
 
     public class BankViewModelValidator: AbstractValidator<BankViewModel>

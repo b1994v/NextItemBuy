@@ -20,6 +20,6 @@ namespace NextItemBuy.Domain
         public bool IsIncome { get; set; }
         public string Reason { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
-        public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public System.DateTime ModifiedOn { get; set; }
     }
 }

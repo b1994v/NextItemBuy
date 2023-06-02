@@ -16,11 +16,11 @@ namespace NextItemBuy.Services.Implementation
         {
             using(var ctx = new NextItemBuyEntities())
             {
-                var query = ctx.Banks.AsQueryable();
+                var query = ctx.Banks.ToList();
 
-                if (searchModel.DateFor.HasValue)
+                if (searchModel.DateFor != null)
                 {
-                    query = query.Where(x => x.ModifiedOn == searchModel.DateFor);
+                    query = query.Where(x => x.ModifiedOn.Date.Equals(searchModel.DateFor.Value.Date)).ToList();
                 }
 
                 total = query.Count();
