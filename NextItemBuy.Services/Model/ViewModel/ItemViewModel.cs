@@ -33,10 +33,10 @@ namespace NextItemBuy.Services.Model
                 .Must(x => x > 0)
                 .WithMessage("Required field.");
             RuleFor(x => x.Deadline)
-                .Must(x => x != null && x.Date >= DateTime.MinValue && x.Date < DateTime.MaxValue.Date)
+                .Must(x => x != null && x.Date > DateTime.MinValue && x.Date < DateTime.MaxValue.Date)
                 .WithMessage("Required field.");
             RuleFor(x => x.NotificationDate)
-                .Must(x => x != null && x.Date >= DateTime.MinValue && x.Date < DateTime.MaxValue.Date)
+                .Must(x => x != null && x.Date > DateTime.MinValue && x.Date < DateTime.MaxValue.Date)
                 .WithMessage("Required field.");
         }
     }

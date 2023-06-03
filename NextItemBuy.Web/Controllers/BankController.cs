@@ -35,5 +35,21 @@ namespace NextItemBuy.Web.Controllers
             _bankService.DeleteFunds(fundsId);
             return Ok(true);
         }
+
+        [HttpGet]
+        [Route("load-items-by-priority")]
+        public IHttpActionResult LoadItemsByPriority()
+        {
+            var result = _bankService.LoadItemsByPriority(User);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("load-user-total-funds")]
+        public IHttpActionResult LoadUserTotalFunds()
+        {
+            var result = _bankService.LoadUserTotalFunds(User);
+            return Ok(result);
+        }
     }
 }

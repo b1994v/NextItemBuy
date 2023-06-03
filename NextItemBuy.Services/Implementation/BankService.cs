@@ -2,6 +2,7 @@
 using NextItemBuy.Services.Exceptions;
 using NextItemBuy.Services.Interfaces;
 using NextItemBuy.Services.Mapper;
+using NextItemBuy.Services.Model;
 using NextItemBuy.Services.Model.SearchModels;
 using NextItemBuy.Services.Model.ViewModel;
 using System;
@@ -83,6 +84,58 @@ namespace NextItemBuy.Services.Implementation
 
                 ctx.Banks.Remove(item);
                 ctx.SaveChanges();
+            }
+        }
+
+        public dynamic LoadItemsByPriority(IPrincipal user)
+        {
+            using(var ctx = new NextItemBuyEntities())
+            {
+                var userModel = ctx.Users.FirstOrDefault(x => x.Username == user.Identity.Name);
+                if(userModel == null)
+                {
+                    throw new CustomException("User not found!");
+                }
+
+                var funds = LoadUserTotalFunds(user);
+
+                var query = ctx.Items.Where(x => x.UserId == userModel.Id && !x.IsBuyed).OrderByDescending(x => x.Deadline);
+
+                var items = new List<ItemViewModel>();
+                decimal totalItemsSum = 0;
+
+                foreach (var item in query)
+                {
+                    if(totalItemsSum <= funds)
+                    {
+                        totalItemsSum += item.Price;
+                        items.Add(item.ToViewModel());
+                    }
+                    if (totalItemsSum > funds)
+                    {
+                        break;
+                    }
+                }
+                return new { funds, items };
+            }
+        }
+
+        public decimal LoadUserTotalFunds(IPrincipal user)
+        {
+            using (var ctx = new NextItemBuyEntities())
+            {
+                var userModel = ctx.Users.FirstOrDefault(x => x.Username == user.Identity.Name);
+                if (userModel == null)
+                {
+                    throw new CustomException("User not found!");
+                }
+
+                var incomeFunds = ctx.Banks.Where(x => x.UserId == userModel.Id && x.IsIncome).ToList();
+                var outcomeFunds = ctx.Banks.Where(x => x.UserId == userModel.Id && !x.IsIncome).ToList();
+
+                var funds = (incomeFunds.Count() != 0 ? incomeFunds.Sum(x => x.Budget) : 0) - (outcomeFunds.Count() != 0 ? outcomeFunds.Sum(x => x.Budget) : 0);
+
+                return funds;
             }
         }
     }

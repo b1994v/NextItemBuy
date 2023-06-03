@@ -10,5 +10,7 @@ namespace NextItemBuy.Services.Interfaces
         List<BankViewModel> LoadFunds(BankSearchModel searchModel, out int total);
         void AddFunds(BankViewModel model, IPrincipal user);
         void DeleteFunds(int fundsId);
+        dynamic LoadItemsByPriority(IPrincipal user);
+        decimal LoadUserTotalFunds(IPrincipal user);
     }
 }
