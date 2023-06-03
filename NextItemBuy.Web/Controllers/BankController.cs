@@ -14,7 +14,6 @@ namespace NextItemBuy.Web.Controllers
 
         [HttpPost]
         [Route("load-funds")]
-        [AllowAnonymous]
         public IHttpActionResult LoadFunds([FromBody] BankSearchModel searchModel)
         {
             var items = _bankService.LoadFunds(searchModel, out int total);
@@ -23,16 +22,14 @@ namespace NextItemBuy.Web.Controllers
 
         [HttpPost]
         [Route("add-funds")]
-        [AllowAnonymous]
         public IHttpActionResult AddFunds([FromBody] BankViewModel model)
         {
-            _bankService.AddFunds(model);
+            _bankService.AddFunds(model, User);
             return Ok(true);
         }
 
         [HttpPost]
         [Route("delete-funds")]
-        [AllowAnonymous]
         public IHttpActionResult DeleteFunds([FromBody] int fundsId)
         {
             _bankService.DeleteFunds(fundsId);

@@ -15,7 +15,7 @@ namespace NextItemBuy.Domain
     public partial class Bank
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public System.Guid UserId { get; set; }
         public int Budget { get; set; }
         public bool IsIncome { get; set; }
         public string Reason { get; set; }

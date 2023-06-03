@@ -39,7 +39,6 @@ namespace NextItemBuy.Services.Mapper
             return new BankViewModel
             {
                 Id = entity.Id,
-                UserId = entity.UserId,
                 Budget = entity.Budget,
                 IsIncome = entity.IsIncome,
                 Reason = entity.Reason,

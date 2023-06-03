@@ -7,6 +7,7 @@ using NextItemBuy.Services.Model.SearchModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 
 namespace NextItemBuy.Services.Implementation
 {
@@ -59,7 +60,7 @@ namespace NextItemBuy.Services.Implementation
             }
         }
 
-        public void SaveOrUpdate(ItemViewModel model)
+        public void SaveOrUpdate(ItemViewModel model, IPrincipal user)
         {
             var validator = new ItemViewModelValidator();
             var result = validator.Validate(model);
@@ -70,6 +71,12 @@ namespace NextItemBuy.Services.Implementation
 
             using(var ctx = new NextItemBuyEntities())
             {
+                var userModel = ctx.Users.FirstOrDefault(x => x.Username == user.Identity.Name);
+                if(userModel == null)
+                {
+                    throw new CustomException("User not found!");
+                }
+
                 var item = ctx.Items.FirstOrDefault(x => x.Id == model.Id);
 
                 if(item != null)
@@ -86,7 +93,7 @@ namespace NextItemBuy.Services.Implementation
                     return;
                 }
 
-                item = new Item(model.UserId, model.Name, model.Description, model.Price, model.Deadline, model.NotificationDate);
+                item = new Item(userModel.Id, model.Name, model.Description, model.Price, model.Deadline, model.NotificationDate);
                 ctx.Items.Add(item);
 
                 ctx.SaveChanges();

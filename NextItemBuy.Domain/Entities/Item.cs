@@ -8,7 +8,7 @@ namespace NextItemBuy.Domain
         {
 
         }
-        public Item(int userId, string name, string description, decimal price, DateTime deadline, DateTime notificationDate)
+        public Item(Guid userId, string name, string description, decimal price, DateTime deadline, DateTime notificationDate)
         {
             UserId = userId;
             Name = name;

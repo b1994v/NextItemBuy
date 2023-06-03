@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9c04c7cef2684e6d852b1c5fb798c4d0" Name="Diagram1">
-        <EntityTypeShape EntityType="NextItemBuyModel.Item" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="NextItemBuyModel.Bank" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="NextItemBuyModel.User" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NextItemBuyModel.Item" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NextItemBuyModel.Bank" Width="1.5" PointX="6.25" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

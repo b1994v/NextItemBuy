@@ -15,14 +15,14 @@ namespace NextItemBuy.Domain
     public partial class Item
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public System.Guid UserId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public decimal Price { get; set; }
         public System.DateTime Deadline { get; set; }
+        public bool IsBuyed { get; set; }
+        public System.DateTime NotificationDate { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
-        public bool IsBuyed { get; set; }
-        public decimal Price { get; set; }
-        public System.DateTime NotificationDate { get; set; }
     }
 }

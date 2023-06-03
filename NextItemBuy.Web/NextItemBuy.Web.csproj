@@ -109,6 +109,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AuthenticationHelperExtension.cs" />
+    <Compile Include="Helpers\AuthentificationHelper.cs" />
     <Compile Include="Helpers\WebApiExceptionFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

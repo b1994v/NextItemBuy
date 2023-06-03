@@ -7,6 +7,7 @@ using NextItemBuy.Services.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 
 namespace NextItemBuy.Services.Implementation
 {
@@ -34,7 +35,7 @@ namespace NextItemBuy.Services.Implementation
             }
         }
 
-        public void AddFunds(BankViewModel model)
+        public void AddFunds(BankViewModel model, IPrincipal user)
         {
             var validator = new BankViewModelValidator();
             var result = validator.Validate(model);
@@ -45,6 +46,12 @@ namespace NextItemBuy.Services.Implementation
 
             using(var ctx = new NextItemBuyEntities())
             {
+                var userModel = ctx.Users.FirstOrDefault(x => x.Username == user.Identity.Name);
+                if(userModel == null)
+                {
+                    throw new CustomException("User not found!");
+                }
+
                 var item = ctx.Banks.FirstOrDefault(x => x.Id == model.Id);
                 if(item != null)
                 {
@@ -57,7 +64,7 @@ namespace NextItemBuy.Services.Implementation
                     return;
                 }
 
-                item = new Bank(1, model.Budget, model.IsIncome, model.Reason);
+                item = new Bank(userModel.Id, model.Budget, model.IsIncome, model.Reason);
 
                 ctx.Banks.Add(item);
                 ctx.SaveChanges();

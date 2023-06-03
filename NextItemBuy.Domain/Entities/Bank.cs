@@ -9,7 +9,7 @@ namespace NextItemBuy.Domain
 
         }
 
-        public Bank(int userId, int budget, bool isIncome, string reason)
+        public Bank(Guid userId, int budget, bool isIncome, string reason)
         {
             UserId = userId;
             Budget = budget;

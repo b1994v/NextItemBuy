@@ -8,7 +8,6 @@ namespace NextItemBuy.Services.Model.ViewModel
     public class BankViewModel
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
         public int Budget { get; set; }
         public bool IsIncome { get; set; }
         public string Reason { get; set; }

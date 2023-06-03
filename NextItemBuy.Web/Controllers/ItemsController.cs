@@ -14,7 +14,6 @@ namespace NextItemBuy.Web.Controllers
 
         [HttpPost]
         [Route("load-items")]
-        [AllowAnonymous]
         public IHttpActionResult LoadItems([FromBody] ItemsSearchModel searchModel)
         {
             var items = _itemsService.LoadItems(searchModel, out int total);
@@ -23,16 +22,14 @@ namespace NextItemBuy.Web.Controllers
 
         [HttpPost]
         [Route("save-item")]
-        [AllowAnonymous]
         public IHttpActionResult SaveOrUpdate([FromBody] ItemViewModel model)
         {
-            _itemsService.SaveOrUpdate(model);
+            _itemsService.SaveOrUpdate(model, User);
             return Ok(true);
         }
 
         [HttpPost]
         [Route("get-item-details")]
-        [AllowAnonymous]
         public IHttpActionResult GetItemDetails([FromBody] int itemId)
         {
             var result = _itemsService.LoadItemDetails(itemId);
@@ -41,7 +38,6 @@ namespace NextItemBuy.Web.Controllers
 
         [HttpPost]
         [Route("delete-item")]
-        [AllowAnonymous]
         public IHttpActionResult DeleteItem([FromBody] int itemId)
         {
             _itemsService.DeleteItem(itemId);
@@ -50,7 +46,6 @@ namespace NextItemBuy.Web.Controllers
 
         [HttpPost]
         [Route("buyed-item")]
-        [AllowAnonymous]
         public IHttpActionResult SetItemToBuyed([FromBody] int itemId)
         {
             _itemsService.SetItemToBuyed(itemId);

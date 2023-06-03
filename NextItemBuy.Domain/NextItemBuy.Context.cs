@@ -25,8 +25,8 @@ namespace NextItemBuy.Domain
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
-        public virtual DbSet<User> Users { get; set; }
     }
 }

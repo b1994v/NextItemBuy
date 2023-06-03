@@ -1,14 +1,13 @@
 ﻿using Microsoft.Practices.ServiceLocation;
-using NextItemBuy.Services.Exceptions;
 using NextItemBuy.Services.Interfaces;
 using NextItemBuy.Services.Model;
-using System.Security.Principal;
+using NextItemBuy.Web.Helpers;
+using System.Web;
 using System.Web.Http;
 
 namespace NextItemBuy.Web.Controllers
 {
     [RoutePrefix("api/user")]
-    [Authorize]
     public class UserController : ApiController
     {
         private readonly IAuthenticationService _authenticationService = ServiceLocator.Current.GetInstance<IAuthenticationService>();
@@ -21,7 +20,8 @@ namespace NextItemBuy.Web.Controllers
         {
             var result = _authenticationService.Login(model);
 
-
+            HttpContext.Current.GenerateToken(result);
+            
             return Ok(result);
         }
 

@@ -11,6 +11,7 @@ namespace NextItemBuy.Web.App_Start
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.Filters.Add(new AuthentificationHelper());
             config.Filters.Add(new WebApiExceptionFilterAttribute());
 
             // Web API routes
