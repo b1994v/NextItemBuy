@@ -127,6 +127,9 @@ namespace NextItemBuy.Services.Implementation
 
                 item.IsBuyed = true;
 
+                var outcome = new Bank(item.UserId, (int)item.Price, false, $"buyed: {item.Name}");
+                ctx.Banks.Add(outcome);
+
                 ctx.SaveChanges();
             }
         }
