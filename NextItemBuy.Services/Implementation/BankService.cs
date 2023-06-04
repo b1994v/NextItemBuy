@@ -106,14 +106,10 @@ namespace NextItemBuy.Services.Implementation
 
                 foreach (var item in query)
                 {
-                    if(totalItemsSum <= funds)
+                    if(totalItemsSum + item.Price <= funds)
                     {
                         totalItemsSum += item.Price;
                         items.Add(item.ToViewModel());
-                    }
-                    if (totalItemsSum > funds)
-                    {
-                        break;
                     }
                 }
                 return new { funds, items };

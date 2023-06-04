@@ -125,6 +125,16 @@ namespace NextItemBuy.Services.Implementation
                     throw new ApplicationException("Item not found");
                 }
 
+                var incomeFunds = ctx.Banks.Where(x => x.UserId == item.UserId && x.IsIncome).ToList();
+                var outcomeFunds = ctx.Banks.Where(x => x.UserId == item.UserId && !x.IsIncome).ToList();
+
+                var funds = (incomeFunds.Count() != 0 ? incomeFunds.Sum(x => x.Budget) : 0) - (outcomeFunds.Count() != 0 ? outcomeFunds.Sum(x => x.Budget) : 0);
+
+                if(item.Price > funds)
+                {
+                    throw new ApplicationException("Not enough funds!");
+                }
+
                 item.IsBuyed = true;
 
                 var outcome = new Bank(item.UserId, (int)item.Price, false, $"buyed: {item.Name}");
