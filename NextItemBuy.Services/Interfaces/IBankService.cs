@@ -7,7 +7,7 @@ namespace NextItemBuy.Services.Interfaces
 {
     public interface IBankService
     {
-        List<BankViewModel> LoadFunds(BankSearchModel searchModel, out int total);
+        List<BankViewModel> LoadFunds(BankSearchModel searchModel, out int total, IPrincipal user);
         void AddFunds(BankViewModel model, IPrincipal user);
         void DeleteFunds(int fundsId);
         dynamic LoadItemsByPriority(IPrincipal user);

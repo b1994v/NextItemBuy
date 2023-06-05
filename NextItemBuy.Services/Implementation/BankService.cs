@@ -14,11 +14,17 @@ namespace NextItemBuy.Services.Implementation
 {
     public class BankService: IBankService
     {
-        public List<BankViewModel> LoadFunds(BankSearchModel searchModel, out int total)
+        public List<BankViewModel> LoadFunds(BankSearchModel searchModel, out int total, IPrincipal user)
         {
             using(var ctx = new NextItemBuyEntities())
             {
-                var query = ctx.Banks.ToList();
+                var userModel = ctx.Users.FirstOrDefault(x => x.Username == user.Identity.Name);
+                if (userModel == null)
+                {
+                    throw new CustomException("User not found!");
+                }
+
+                var query = ctx.Banks.Where(x => x.UserId == userModel.Id).ToList();
 
                 if (searchModel.DateFor != null)
                 {

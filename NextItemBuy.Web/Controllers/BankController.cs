@@ -16,7 +16,7 @@ namespace NextItemBuy.Web.Controllers
         [Route("load-funds")]
         public IHttpActionResult LoadFunds([FromBody] BankSearchModel searchModel)
         {
-            var items = _bankService.LoadFunds(searchModel, out int total);
+            var items = _bankService.LoadFunds(searchModel, out int total, User);
             return Ok(new { items, total });
         }
 
