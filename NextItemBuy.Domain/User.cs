@@ -22,5 +22,6 @@ namespace NextItemBuy.Domain
         public string Email { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public byte[] Image { get; set; }
     }
 }

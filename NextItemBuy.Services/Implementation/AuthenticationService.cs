@@ -6,8 +6,10 @@ using NextItemBuy.Services.Model;
 using NextItemBuy.Services.Utils;
 using System;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Security.Principal;
+using System.Web;
 
 namespace NextItemBuy.Services.Implementation
 {
@@ -35,11 +37,12 @@ namespace NextItemBuy.Services.Implementation
                     throw new ApplicationException("Wrong Password");
                 }
 
+
                 return user.ToViewModel();
             }
         }
 
-        public void Register(UserModel model)
+        public void Register(UserModel model, HttpPostedFile file)
         {
             var validator = new UserModelValidator();
             var result = validator.Validate(model);
@@ -58,7 +61,16 @@ namespace NextItemBuy.Services.Implementation
 
                 var hashedPass = EncriptionUtil.EncryptPassword(model.Password);
 
-                var newuser = new User(model.FirstName, model.LastName, model.Email, model.UserName, hashedPass);
+                var fileBytes = new byte[] { };
+                if (file != null && file.ContentLength > 0)
+                {
+                    using (var binaryReader = new BinaryReader(file.InputStream))
+                    {
+                        fileBytes = binaryReader.ReadBytes(file.ContentLength);
+                    }
+                }
+
+                var newuser = new User(model.FirstName, model.LastName, model.Email, model.UserName, hashedPass, fileBytes);
 
                 ctx.Users.Add(newuser);
                 ctx.SaveChanges();

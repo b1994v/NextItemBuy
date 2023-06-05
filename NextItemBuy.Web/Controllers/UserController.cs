@@ -1,7 +1,12 @@
 ﻿using Microsoft.Practices.ServiceLocation;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NextItemBuy.Services.Interfaces;
 using NextItemBuy.Services.Model;
+using NextItemBuy.Services.Utils;
 using NextItemBuy.Web.Helpers;
+using System.Collections.Generic;
+using System.IO;
 using System.Web;
 using System.Web.Http;
 
@@ -28,10 +33,17 @@ namespace NextItemBuy.Web.Controllers
         [HttpPost]
         [Route("register")]
         [AllowAnonymous]
-        public IHttpActionResult Register([FromBody] UserModel model)
+        public IHttpActionResult Register()
         {
-            _authenticationService.Register(model);
-            return Ok(true);
+            var request = HttpContext.Current.Request;
+
+            var model = JsonConvert.DeserializeObject<UserModel>(request.Form["model"]);
+
+            var file = request.Files["file"];
+            model.FileName = file.FileName;
+
+            _authenticationService.Register(model, file);
+            return Ok(false);
         }
     }
 }

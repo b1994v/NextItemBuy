@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Attributes;
 using System;
+using System.Web;
 
 namespace NextItemBuy.Services.Model
 {
@@ -13,6 +14,9 @@ namespace NextItemBuy.Services.Model
         public string Email { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+        public HttpPostedFileBase File { get; set; }
+        public string FileName { get; set; }
+        public byte[] Image { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
     }
@@ -40,6 +44,10 @@ namespace NextItemBuy.Services.Model
             RuleFor(x => x.Password)
                 .NotEmpty()
                 .WithMessage("Required field.");
+
+            RuleFor(x => x.FileName)
+               .NotEmpty()
+               .WithMessage("Required field.");
 
         }
     }

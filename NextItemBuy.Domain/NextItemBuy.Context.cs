@@ -18,6 +18,8 @@ namespace NextItemBuy.Domain
         public NextItemBuyEntities()
             : base("name=NextItemBuyEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

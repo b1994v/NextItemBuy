@@ -8,7 +8,7 @@ namespace NextItemBuy.Domain
         {
 
         }
-        public User(string firstName, string lastName, string email, string userName, string password)
+        public User(string firstName, string lastName, string email, string userName, string password, byte[] image)
         {
             Id = Guid.NewGuid();
             FirstName = firstName;
@@ -16,6 +16,7 @@ namespace NextItemBuy.Domain
             Email = email;
             Username = userName;
             Password = password;
+            Image = image;
             CreatedOn = DateTime.Now;
             ModifiedOn = DateTime.Now;
         }
