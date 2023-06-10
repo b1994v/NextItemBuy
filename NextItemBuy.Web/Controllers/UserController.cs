@@ -40,7 +40,7 @@ namespace NextItemBuy.Web.Controllers
             var model = JsonConvert.DeserializeObject<UserModel>(request.Form["model"]);
 
             var file = request.Files["file"];
-            model.FileName = file.FileName;
+            model.FileName = file?.FileName;
 
             _authenticationService.Register(model, file);
             return Ok(false);
