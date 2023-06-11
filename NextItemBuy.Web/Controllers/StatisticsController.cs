@@ -10,13 +10,12 @@ namespace NextItemBuy.Web.Controllers
     {
         private readonly IStatisticsService _statisticsService = ServiceLocator.Current.GetInstance<IStatisticsService>();
 
-        //[HttpPost]
-        //[Route("load-items")]
-        //[AllowAnonymous]
-        //public IHttpActionResult LoadItems([FromBody] ItemsSearchModel searchModel)
-        //{
-        //    var items = _itemsService.LoadItems(searchModel, out int total);
-        //    return Ok(new { items, total });
-        //}
+        [HttpGet]
+        [Route("load-statistics")]
+        public IHttpActionResult LoadStatistics()
+        {
+            var items = _statisticsService.LoadStatistics(User);
+            return Ok(items);
+        }
     }
 }
