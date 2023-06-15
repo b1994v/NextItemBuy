@@ -8,7 +8,7 @@ namespace NextItemBuy.Services.Interfaces
 {
     public interface IItemsService
     {
-        List<ItemViewModel> LoadItems(ItemsSearchModel searchModel, out int total);
+        List<ItemViewModel> LoadItems(ItemsSearchModel searchModel, out int total, IPrincipal user);
         void SaveOrUpdate(ItemViewModel model, IPrincipal user);
         ItemViewModel LoadItemDetails(int itemId);
         void DeleteItem(int itemId);

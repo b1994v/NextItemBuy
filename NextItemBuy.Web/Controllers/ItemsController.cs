@@ -16,7 +16,7 @@ namespace NextItemBuy.Web.Controllers
         [Route("load-items")]
         public IHttpActionResult LoadItems([FromBody] ItemsSearchModel searchModel)
         {
-            var items = _itemsService.LoadItems(searchModel, out int total);
+            var items = _itemsService.LoadItems(searchModel, out int total, User);
             return Ok(new { items, total });
         }
 

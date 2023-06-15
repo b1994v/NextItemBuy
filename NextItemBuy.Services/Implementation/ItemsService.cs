@@ -14,16 +14,24 @@ namespace NextItemBuy.Services.Implementation
 {
     public class ItemsService : IItemsService
     {
-        public List<ItemViewModel> LoadItems(ItemsSearchModel searchModel, out int total)
+        public List<ItemViewModel> LoadItems(ItemsSearchModel searchModel, out int total, IPrincipal user)
         {
+
             using(var ctx = new NextItemBuyEntities())
             {
-                var query = ctx.Items.AsQueryable();
+                var userModel = ctx.Users.FirstOrDefault(x => x.Username == user.Identity.Name);
+                if (userModel == null)
+                {
+                    throw new CustomException("User not found!");
+                }
+
+                var query = ctx.Items.Where(x => x.UserId == userModel.Id);
 
                 if (!string.IsNullOrEmpty(searchModel.Key))
                 {
                     query = query.Where(x => x.Name.Contains(searchModel.Key) || x.Description.Contains(searchModel.Key));
                 }
+
                 if (searchModel.Active.HasValue)
                 {
                     if (searchModel.Active.Value)
