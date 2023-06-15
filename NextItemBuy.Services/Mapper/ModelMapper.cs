@@ -28,6 +28,8 @@ namespace NextItemBuy.Services.Mapper
                 Description = entity.Description,
                 Deadline = entity.Deadline,
                 NotificationDate = entity.NotificationDate,
+                CategoryId = entity.ItemCategory.Id,
+                CategoryName = entity.ItemCategory.CategoryName,
                 Price = entity.Price,
                 IsBuyed = entity.IsBuyed,
                 CreatedOn = entity.CreatedOn,
@@ -45,6 +47,15 @@ namespace NextItemBuy.Services.Mapper
                 Reason = entity.Reason,
                 CreatedOn = entity.CreatedOn,
                 ModifiedOn = entity.ModifiedOn
+            };
+        }
+
+        public static ItemCategoryViewModel ToViewModel(this ItemCategory entity)
+        {
+            return new ItemCategoryViewModel
+            {
+                CategoryId = entity.Id,
+                CategoryName = entity.CategoryName
             };
         }
     }

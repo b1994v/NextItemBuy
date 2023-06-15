@@ -51,5 +51,13 @@ namespace NextItemBuy.Web.Controllers
             _itemsService.SetItemToBuyed(itemId);
             return Ok(true);
         }
+
+        [HttpGet]
+        [Route("load-categories")]
+        public IHttpActionResult LoadCategories()
+        {
+            var result = _itemsService.LoadCategories(User);
+            return Ok(result);
+        }
     }
 }

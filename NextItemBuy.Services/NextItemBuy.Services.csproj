@@ -60,6 +60,7 @@
     <Compile Include="Model\SearchModels\BaseSearchModel.cs" />
     <Compile Include="Model\SearchModels\ItemsSearchModel.cs" />
     <Compile Include="Model\ViewModel\BankViewModel.cs" />
+    <Compile Include="Model\ViewModel\ItemCategoryViewModel.cs" />
     <Compile Include="Model\ViewModel\ItemViewModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\UserModel.cs" />

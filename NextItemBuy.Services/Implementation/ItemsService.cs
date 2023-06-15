@@ -4,6 +4,7 @@ using NextItemBuy.Services.Interfaces;
 using NextItemBuy.Services.Mapper;
 using NextItemBuy.Services.Model;
 using NextItemBuy.Services.Model.SearchModels;
+using NextItemBuy.Services.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,12 +80,19 @@ namespace NextItemBuy.Services.Implementation
 
                 var item = ctx.Items.FirstOrDefault(x => x.Id == model.Id);
 
+                var itemCategory = ctx.ItemCategories.FirstOrDefault(x => x.Id == model.CategoryId);
+                if(itemCategory == null)
+                {
+                    throw new CustomException("Item category not found!");
+                }
+
                 if(item != null)
                 {
                     item.Name = model.Name;
                     item.Description = model.Description;
                     item.Price = model.Price;
                     item.NotificationDate = model.NotificationDate;
+                    item.CategoryId = itemCategory.Id;
                     item.Deadline = model.Deadline;
                     item.IsBuyed = model.IsBuyed;
                     item.ModifiedOn = DateTime.Now;
@@ -93,7 +101,7 @@ namespace NextItemBuy.Services.Implementation
                     return;
                 }
 
-                item = new Item(userModel.Id, model.Name, model.Description, model.Price, model.Deadline, model.NotificationDate);
+                item = new Item(userModel.Id, model.Name, model.Description, model.Price, itemCategory.Id, model.Deadline, model.NotificationDate);
                 ctx.Items.Add(item);
 
                 ctx.SaveChanges();
@@ -141,6 +149,20 @@ namespace NextItemBuy.Services.Implementation
                 ctx.Banks.Add(outcome);
 
                 ctx.SaveChanges();
+            }
+        }
+
+        public List<ItemCategoryViewModel> LoadCategories(IPrincipal user)
+        {
+            using(var ctx = new NextItemBuyEntities())
+            {
+                var userModel = ctx.Users.FirstOrDefault(x => x.Username == user.Identity.Name);
+                if (userModel == null)
+                {
+                    throw new CustomException("User not found!");
+                }
+
+                return ctx.ItemCategories.ToList().OrderBy(x => x.CategoryName).Select(x => x.ToViewModel()).ToList();
             }
         }
     }

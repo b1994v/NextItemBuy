@@ -9,6 +9,8 @@ namespace NextItemBuy.Services.Model
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
@@ -29,6 +31,10 @@ namespace NextItemBuy.Services.Model
                 .NotNull()
                 .WithMessage("Required field.");
             RuleFor(x => x.Price)
+                .NotNull()
+                .Must(x => x > 0)
+                .WithMessage("Required field.");
+            RuleFor(x => x.CategoryId)
                 .NotNull()
                 .Must(x => x > 0)
                 .WithMessage("Required field.");

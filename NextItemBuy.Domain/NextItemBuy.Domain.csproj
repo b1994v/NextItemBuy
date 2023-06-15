@@ -52,6 +52,9 @@
     <Compile Include="Item.cs">
       <DependentUpon>NextItemBuy.tt</DependentUpon>
     </Compile>
+    <Compile Include="ItemCategory.cs">
+      <DependentUpon>NextItemBuy.tt</DependentUpon>
+    </Compile>
     <Compile Include="NextItemBuy.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

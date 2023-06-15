@@ -12,20 +12,20 @@ namespace NextItemBuy.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Item
+    public partial class ItemCategory
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ItemCategory()
+        {
+            this.Items = new HashSet<Item>();
+        }
+    
         public int Id { get; set; }
-        public System.Guid UserId { get; set; }
-        public int CategoryId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-        public System.DateTime Deadline { get; set; }
-        public bool IsBuyed { get; set; }
-        public System.DateTime NotificationDate { get; set; }
+        public string CategoryName { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
-        public virtual ItemCategory ItemCategory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Item> Items { get; set; }
     }
 }

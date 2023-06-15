@@ -18,8 +18,6 @@ namespace NextItemBuy.Domain
         public NextItemBuyEntities()
             : base("name=NextItemBuyEntities")
         {
-            this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -28,7 +26,8 @@ namespace NextItemBuy.Domain
         }
     
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
+        public virtual DbSet<ItemCategory> ItemCategories { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
     }
 }
