@@ -47,7 +47,20 @@ namespace NextItemBuy.Services.Implementation
                     });
                 }
 
-                return new { incomeStatistics, outcomeStatistics };
+                var categoriesStatistics = new List<StatisticsViewModel>();
+                var itemsCategory = ctx.ItemCategories.AsQueryable();
+
+                foreach (var item in itemsCategory)
+                {
+                    var itemsInCategory = ctx.Items.Where(x => x.UserId == userModel.Id && x.ItemCategory.Id == item.Id && x.IsBuyed).Count();
+                    categoriesStatistics.Add(new StatisticsViewModel
+                    {
+                        Name = item.CategoryName,
+                        Value = itemsInCategory
+                    });
+                }
+
+                return new { incomeStatistics, outcomeStatistics, categoriesStatistics };
 
             }
 
