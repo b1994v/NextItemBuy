@@ -17,7 +17,7 @@ namespace NextItemBuy.Services.Model
         public HttpPostedFileBase File { get; set; }
         public string FileName { get; set; }
         public byte[] Image { get; set; }
-        public DateTime CreatedOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
     }
 

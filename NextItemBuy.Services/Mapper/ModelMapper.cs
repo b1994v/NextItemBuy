@@ -15,7 +15,8 @@ namespace NextItemBuy.Services.Mapper
                 LastName = entity.LastName,
                 Email = entity.Email,
                 UserName = entity.Username,
-                Image = entity.Image
+                Image = entity.Image,
+                CreatedOn = entity.CreatedOn
             };
         }
 

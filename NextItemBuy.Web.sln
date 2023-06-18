@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextItemBuy.Services", "Nex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextItemBuy.Domain", "NextItemBuy.Domain\NextItemBuy.Domain.csproj", "{EC018AEF-8238-4A46-ABCE-03BB3DC16B4E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{3AA59415-0FC9-4D50-8BFD-648B22C0DA22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextItemBuy.NotificationService", "..\..\..\Users\Bojan\source\repos\NextItemBuy.NotificationService\NextItemBuy.NotificationService.csproj", "{71C4BC3B-2CC9-4F87-B1E3-8862D3621BC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +31,16 @@ Global
 		{EC018AEF-8238-4A46-ABCE-03BB3DC16B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC018AEF-8238-4A46-ABCE-03BB3DC16B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC018AEF-8238-4A46-ABCE-03BB3DC16B4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71C4BC3B-2CC9-4F87-B1E3-8862D3621BC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71C4BC3B-2CC9-4F87-B1E3-8862D3621BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71C4BC3B-2CC9-4F87-B1E3-8862D3621BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71C4BC3B-2CC9-4F87-B1E3-8862D3621BC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{71C4BC3B-2CC9-4F87-B1E3-8862D3621BC7} = {3AA59415-0FC9-4D50-8BFD-648B22C0DA22}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {972080AC-7E51-4284-9F11-C1696B9838A5}
