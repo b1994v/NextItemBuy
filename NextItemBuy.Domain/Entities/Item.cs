@@ -8,7 +8,7 @@ namespace NextItemBuy.Domain
         {
 
         }
-        public Item(Guid userId, string name, string description, decimal price, int itemCategoryId, DateTime deadline, DateTime notificationDate)
+        public Item(Guid userId, string name, string description, decimal price, int itemCategoryId, DateTime deadline, DateTime notificationDate, bool isBuyed)
         {
             UserId = userId;
             Name = name;
@@ -17,7 +17,7 @@ namespace NextItemBuy.Domain
             NotificationDate = notificationDate;
             CategoryId = itemCategoryId;
             Deadline = deadline;
-            IsBuyed = false;
+            IsBuyed = isBuyed;
             CreatedOn = DateTime.Now;
             ModifiedOn = DateTime.Now;
         }

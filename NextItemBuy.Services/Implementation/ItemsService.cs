@@ -109,7 +109,7 @@ namespace NextItemBuy.Services.Implementation
                     return;
                 }
 
-                item = new Item(userModel.Id, model.Name, model.Description, model.Price, itemCategory.Id, model.Deadline, model.NotificationDate);
+                item = new Item(userModel.Id, model.Name, model.Description, model.Price, itemCategory.Id, model.Deadline, model.NotificationDate, model.IsBuyed);
                 ctx.Items.Add(item);
 
                 ctx.SaveChanges();

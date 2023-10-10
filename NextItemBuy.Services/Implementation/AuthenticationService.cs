@@ -5,6 +5,7 @@ using NextItemBuy.Services.Mapper;
 using NextItemBuy.Services.Model;
 using NextItemBuy.Services.Utils;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Web;
 
 namespace NextItemBuy.Services.Implementation
 {
-    public class AuthenticationService: IAuthenticationService
+    public class AuthenticationService : IAuthenticationService
     {
         public UserModel Login(LoginModel model)
         {
@@ -29,12 +30,33 @@ namespace NextItemBuy.Services.Implementation
                 var user = ctx.Users.FirstOrDefault(x => x.Username.Equals(model.Username) || x.Email.Equals(model.Username));
                 if (user == null)
                 {
-                    throw new ApplicationException("User not found!");
+                    List<ValidationRecord> validationRecord = new List<ValidationRecord>
+                    {
+                        new ValidationRecord
+                        {
+                            Key = "Username",
+                            Message = "User not exist."
+                        }
+                    };
+
+                    throw new CustomException(validationRecord);
+                    //throw new ApplicationException("User not found!");
                 }
 
-                if (!EncriptionUtil.VerifyMd5Hash(model.Password, user.Password))
+                var isValidPassword = EncriptionUtil.VerifyMd5Hash(model.Password, user.Password);
+                if (!isValidPassword)
                 {
-                    throw new ApplicationException("Wrong Password");
+                    List<ValidationRecord> validationRecord = new List<ValidationRecord>
+                    {
+                        new ValidationRecord
+                        {
+                            Key = "Password",
+                            Message = "Wrong password."
+                        }
+                    };
+                    throw new CustomException(validationRecord);
+
+                    //throw new ApplicationException("Wrong Password");
                 }
 
 
@@ -51,7 +73,7 @@ namespace NextItemBuy.Services.Implementation
                 throw new CustomException(result.Errors.Select(x => new ValidationRecord(x.PropertyName, x.ErrorMessage)).ToList());
             }
 
-            using(var ctx = new NextItemBuyEntities())
+            using (var ctx = new NextItemBuyEntities())
             {
                 var userExists = ctx.Users.FirstOrDefault(x => x.Email == model.Email);
                 if (userExists != null)
